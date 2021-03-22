@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+sourceCompatibility = '15'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //external libraries - utils
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    compile group: 'io.projectreactor', name: 'reactor-core', version: '3.3.10.RELEASE'
+    //spring
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    //jackson
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar.enabled = true
+bootJar.enabled = false
+
+

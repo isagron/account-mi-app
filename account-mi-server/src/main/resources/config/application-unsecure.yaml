@@ -1,0 +1,26 @@
+db:
+  host: "${db.host}"
+  port: "${db.port}"
+  user: "${db.user}"
+  password: "${db.password}"
+
+
+
+
+springdoc:
+  swagger-ui:
+    path: '/swagger-ui.html'
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      database: account-mi
+      host: "${db.host}"
+      port: "${db.port}"
+      uri: "mongodb://${db.user}:${db.password}@${db.host}:${db.port}/${spring.data.mongodb.database}"
+
+security:
+  firebase-props:
+    enable: false

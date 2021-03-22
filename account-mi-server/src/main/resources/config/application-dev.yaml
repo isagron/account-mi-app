@@ -1,0 +1,20 @@
+db:
+  host: localhost
+  port: 27017
+
+
+
+
+springdoc:
+  swagger-ui:
+    path: '/swagger-ui.html'
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+security:
+  firebase-props:
+    enable: false
+

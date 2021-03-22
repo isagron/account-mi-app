@@ -1,0 +1,20 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li
+      class="page-item"
+      [ngClass]="{'disabled': disablePrev}">
+      <a class="page-link" (click) = "goToPrevPage()" tabindex="-1">Previous</a>
+    </li>
+    <li
+      *ngFor="let page of pages"
+      class="page-item"
+      [ngClass]="{'active': page.active}">
+      <a class="page-link" (click)="goToPage(page.label)" >{{page.label}}</a>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="{'disabled': disableNext}">
+      <a class="page-link" (click)="goToNextPage()">Next</a>
+    </li>
+  </ul>
+</nav>

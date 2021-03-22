@@ -1,0 +1,23 @@
+db:
+  host: localhost
+  port: 27017
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+security:
+  firebase-props:
+    enable: true
+    api-key: "${firebase-api-key}"
+    account:
+      type: "service_account"
+      "project-id": "account-mi"
+      "private-key-id": "${firebase-private-key-id}"
+      "private-key": "${firebase-private-key}"
+      "client-email": "${firebase-client-email}"
+      "client-id": "109246710678736864849"
+      "auth-uri": "https://accounts.google.com/o/oauth2/auth"
+      "token-uri": "https://oauth2.googleapis.com/token"
+      "auth-provider-cert-url": "https://www.googleapis.com/oauth2/v1/certs"
+      "client-cert-url": "${firebase-client-cert-url}"

@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="addNewIncomeForm" (ngSubmit)="addNewIncome()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-3 form-group">
+            <label for="income-type">Type</label>
+            <input type="text"
+                   aria-label="Number"
+                   placeholder="Pick one"
+                   matInput
+                   formControlName="type"
+                   id="income-type"
+                   class="form-control"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+          <div class="col-3 form-group">
+            <label for="amount-input">Amount</label>
+            <input
+              id="amount-input"
+              formControlName="amount"
+              class="form-control"
+              type="number">
+          </div>
+          <div class="col-3 form-group">
+            <label for="date-input">Date</label>
+            <div class="input-group">
+              <input
+                id="date-input"
+                class="form-control"
+                formControlName="date"
+                placeholder="yyyy-mm-dd"
+                name="date"
+                [(ngModel)]="dateModel"
+                ngbDatepicker
+                #d="ngbDatepicker">
+              <span class="input-group-addon">
+                        <span class="oi oi-calendar" (click)="d.toggle()" type="button"></span>
+                    </span>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <label for="consistent">Consistent</label>
+            <section class="example-section">
+              <mat-slide-toggle
+                id="consistent"
+                class="example-margin"
+                formControlName="consistent"
+                [color]="color"
+                checked=false
+                disabled=false>
+              </mat-slide-toggle>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!addNewIncomeForm.valid">New Income
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

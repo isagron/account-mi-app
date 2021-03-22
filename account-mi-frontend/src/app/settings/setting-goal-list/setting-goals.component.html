@@ -1,0 +1,54 @@
+<div class="contrainer">
+  <h2>Goals</h2>
+
+  <app-add-goal-item></app-add-goal-item>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Category</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Interval</th>
+          <th scope="col">...</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let gs of goalSettings; index as i">
+        <tr #trGoalItem>
+          <th scope="row">{{ i + 1 }}</th>
+          <td id="category-cell" [attr.contenteditable]="gs.isEditable()" type="text">{{gs.category}}</td>
+          <td id="amount-cell" [attr.contenteditable]="gs.isEditable()" type="number">{{gs.amount}}</td>
+          <td>{{gs.interval}}</td>
+          <td *ngIf="gs.mode === 0">
+            <button type="button" class="btn btn-danger" aria-label="Left Align"(click)="delete(i,gs)">
+              <span class="oi oi-trash"></span>
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              aria-label="Left Align"
+              [disabled]="disabled"
+              (click)="switchToEditMode(gs)">
+              <span class="oi oi-pencil"></span>
+            </button>
+          </td>
+
+          <td  *ngIf="gs.mode === 1">
+            <button type="button" class="btn btn-danger" aria-label="Left Align" (click)="saveGoal(trGoalItem, gs, i)">
+              <span class="oi oi-circle-check"></span>
+            </button>
+            <button type="button" class="btn btn-danger" aria-label="Left Align" (click)="ignoreEdit(trGoalItem, gs, i)">
+              <span class="oi oi-circle-x"></span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+

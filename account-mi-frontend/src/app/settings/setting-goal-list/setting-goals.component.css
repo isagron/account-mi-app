@@ -1,0 +1,8 @@
+td:last-child {
+  width: 1%;
+  white-space: nowrap;
+}
+
+td:not(:last-child){
+  width: auto;
+}

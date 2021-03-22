@@ -1,0 +1,33 @@
+
+<h3 class="text-primary text border-bottom">Total per month</h3>
+<div class="row">
+  <span class="col-12">
+    <label class="font-weight-bold" for="dropdownMonth">Category</label>
+    <div ngbDropdown class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMonth"
+        ngbDropdownToggle>
+        {{selectedCategory}}
+        <span class="caret"></span>
+      </button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownCategory">
+        <li  *ngFor="let category of categories"><button ngbDropdownItem (click)="selectCategory(category)">{{category}}</button>
+        </li>
+      </ul>
+    </div>
+  </span>
+</div>
+<hr>
+<div>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+    </canvas>
+  </div>
+</div>

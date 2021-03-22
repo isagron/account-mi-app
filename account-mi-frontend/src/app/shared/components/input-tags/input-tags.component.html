@@ -1,0 +1,26 @@
+<div>
+    <div class="input-group">
+      <label class="pr-2">{{label}}</label>
+      <input
+        class="form-control"
+        type="text"
+        #newTag>
+      <span class="input-group-btn align-bottom">
+                  <button type="button" class="btn btn-primary"
+                          (click)="addNewTag(newTag.value)">Add</button>
+        </span>
+    </div>
+
+  <div class="pt-2">
+      <span class="pr-2"
+        *ngFor="let tag of tags; let i = index">
+        <button type="button" class="btn btn-primary">
+          {{tag}} <span class="oi oi-circle-x" (click)="deleteTag(tag)"></span>
+        </button>
+      </span>
+  </div>
+</div>
+
+
+
+

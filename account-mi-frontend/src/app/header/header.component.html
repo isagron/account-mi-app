@@ -1,0 +1,40 @@
+<nav class="navbar navbar-light navbar-expand-md bg-white topbar mb-4 shadow navigation-clean-search">
+  <div class="container">
+    <div class="navbar-brand">
+      <a href="#" class="navbar-brand">AccountMi</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item"
+            role="presentation"
+            routerLinkActive="active"
+            *ngIf="isAuthenticated"><a class="nav-link" routerLink="/home">Dashboard</a></li>
+        <li class="nav-item"
+            role="presentation"
+            routerLinkActive="active"
+            *ngIf="isAuthenticated"><a class="nav-link" routerLink="/expenses">Expenses</a></li>
+        <li class="nav-item"
+            role="presentation"
+            routerLinkActive="active"
+            *ngIf="isAuthenticated"><a class="nav-link" routerLink="/incomes">Incomes</a></li>
+        <li class="nav-item"
+            role="presentation"
+            routerLinkActive="active"
+            *ngIf="isAuthenticated"><a class="nav-link" routerLink="/settings">Setting</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="isAuthenticated">
+          <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+        </li>
+        <li *ngIf="!isAuthenticated && mode!==2 && isSecured">
+          <a style="cursor: pointer;" (click)="onSignup()">Sign-Up</a>
+        </li>
+        <li
+          *ngIf="!isAuthenticated && mode===2">
+          <a style="cursor: pointer;" (click)="onLogin()">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

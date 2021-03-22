@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <h2>Account Balance</h2>
+  <div class="row">
+    <div class="col-4 vl">
+      <app-compare-prev-vs-cur
+        [title]="'Incomes'"
+        [current]="accountBalance.incomes.currentMonth"
+        [total]="accountBalance.incomes.totalThisYear"
+        [prev]="accountBalance.incomes.previousMonth">
+      </app-compare-prev-vs-cur>
+    </div>
+    <div class="col-4 vl">
+      <app-compare-prev-vs-cur
+        [title]="'Outcomes'"
+        [current]="accountBalance.outcomes.currentMonth"
+        [total]="accountBalance.outcomes.totalThisYear"
+        [prev]="accountBalance.outcomes.previousMonth">
+      </app-compare-prev-vs-cur>
+    </div>
+
+    <div class="col-4">
+      <app-compare-prev-vs-cur
+        [title]="'Balance'"
+        [current]="accountBalance.balance.currentMonth"
+        [total]="accountBalance.balance.totalThisYear"
+        [prev]="accountBalance.balance.previousMonth">
+      </app-compare-prev-vs-cur>
+    </div>
+  </div>
+
+
+</div>

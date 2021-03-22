@@ -1,0 +1,4 @@
+rootProject.name = 'account-mi-backend'
+include 'account-mi-server'
+include 'account-mi-api'
+

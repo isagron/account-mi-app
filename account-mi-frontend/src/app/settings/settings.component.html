@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <app-page-title title="Settings"></app-page-title>
+  <div class="alert alert-danger" *ngIf="!isAccountSet">
+    <p>"Failed to find account, please click the button to retry</p>
+    <button type="button" (click)="setAccount()">
+      <span class="oi oi-arrow-circle-top"></span>
+    </button>
+  </div>
+  <div *ngIf="isAccountSet">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow border-bottom-primary">
+          <div class="card-body">
+            <app-setting-goals></app-setting-goals>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="col-12">
+        <div class="card shadow border-bottom-primary">
+          <div class="card-body">
+            <h2>Expense</h2>
+            <app-input-tags
+              [label]="'Add expense category'"
+              [tags]="expenseCategories"
+              (onAddNewTag)="addNewExpenseCategory($event)"
+              (onDeleteTag)="openModelDeleteExpenseCategory($event)"></app-input-tags>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="col-12">
+        <div class="card shadow border-bottom-primary">
+          <div class="card-body">
+            <h2>Incomes</h2>
+            <app-input-tags
+              [label]="'Add income category'"
+              [tags]="incomeCategories"
+              (onAddNewTag)="addNewIncomeCategory($event)"
+              (onDeleteTag)="deleteIncomeCategory($event)"></app-input-tags>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+

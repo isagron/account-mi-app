@@ -1,0 +1,26 @@
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.top-buffer { margin-top:20px; }
+
+
+.container-fluid {
+  flex-wrap: nowrap;
+  padding-right: 0;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+  padding-right: .75rem;
+  padding-left: .75rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+

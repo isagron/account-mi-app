@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <h2>Goals</h2>
+  <div class="row justify-content-center">
+    <div class="col-12 align-self-center pr-50">
+      <div class="list-group">
+        <div class="list-group-item" *ngFor="let goalStat of goalStats">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12">
+                  <h3> {{ goalStat.category }} </h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <app-goal-stat-progressbar
+                    [title]="'This month'"
+                    [actual]="goalStat.currentStatus"
+                    [goal]="goalStat.threshold"></app-goal-stat-progressbar>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <app-goal-stat-progressbar
+                    [title]="'AVG'"
+                    [actual]="goalStat.avg"
+                    [goal]="goalStat.threshold"></app-goal-stat-progressbar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

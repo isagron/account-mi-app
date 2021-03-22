@@ -1,0 +1,11 @@
+.align-bottom {
+  vertical-align: bottom;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.mr-top-2 {
+  margin-top: 20px;
+}

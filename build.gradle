@@ -1,0 +1,15 @@
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+    group = 'com.isagron'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+subprojects {
+    dependencies {
+
+    }
+}
+

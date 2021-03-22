@@ -1,0 +1,35 @@
+<!---
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">{{closeLabel}}</button>
+        <button type="button" class="btn btn-primary" (click)="approve()">{{okLabel}}</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div lass="modal fade"  tabindex="-1" aria-labelledby="alertModelLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="alertModelLabel">{{modalTitle}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(modalCancelClose)"></button>
+      </div>
+      <div class="modal-body">
+        <p> {{modalContent}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="activeModal.close(modalCancelClose)">{{closeLabel}}</button>
+        <button type="button" class="btn btn-primary" (click)="activeModal.close(modalApproveClose)">{{okLabel}}</button>
+      </div>
+    </div>
+  </div>
+</div>

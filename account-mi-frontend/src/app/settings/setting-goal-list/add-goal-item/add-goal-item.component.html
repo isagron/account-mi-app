@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="addNewGoalSettingForm" (ngSubmit)="addNewGoalSetting()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-4 form-group">
+            <label for="goal-category">Category</label>
+            <input type="text"
+                   placeholder="Pick category or insert new one"
+                   matInput
+                   formControlName="category"
+                   id="goal-category"
+                   class="form-control"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredCategoryOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+          <div class="col-4 form-group">
+            <label for="goal-amount">Amount</label>
+            <input
+              id="goal-amount"
+              formControlName="amount"
+              class="form-control"
+              type="number">
+          </div>
+          <div class="col-4 form-group">
+            <label for="goal-interval">Interval</label>
+            <select
+              class="form-control"
+              id="goal-interval"
+              formControlName="interval">
+                <option *ngFor="let interval of intervalOptions">{{ interval }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!addNewGoalSettingForm.valid">Add Goal
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

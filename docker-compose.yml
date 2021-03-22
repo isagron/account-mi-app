@@ -1,0 +1,28 @@
+version: '3'
+services:
+  mongo-server:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=isagron
+      - MONGO_INITDB_ROOT_PASSWORD=isagron
+    ports:
+      - 27018:27017
+  account-mi-server:
+    build:
+      context: "./account-mi-server"
+    environment:
+      - spring.profiles.active=unsecure
+      - db.host=mongo-server
+      - db.port=27017
+      - db.user=isagron
+      - db.password=isagron
+    ports:
+      - 8081:8080
+  account-mi-frontend:
+    build:
+      context: "./account-mi-frontend"
+    ports:
+      - 4201:80
+
+
