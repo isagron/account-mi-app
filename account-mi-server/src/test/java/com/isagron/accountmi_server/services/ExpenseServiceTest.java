@@ -46,19 +46,14 @@ class ExpenseServiceTest {
     @BeforeEach
     public void setup() throws ParseException {
         this.expenses = TestCaseData.DataTestCase1.expenseDataTestCase1();
-
-        this.expenseRepository.deleteAll()
-                .thenMany(Flux.fromIterable(expenses))
-                .flatMap(expense -> expenseRepository.save(expense))
-                .doOnNext(expense -> System.out.println("Inserted expense is: " + expense))
-                .blockLast();
+        DataLoader.loadData(this.expenseRepository, TestCaseData.DataTestCase2.expenseData());
     }
 
     @Test
     public void getTotalExpenseForDateRange(){
-        StepVerifier.create(this.expenseService.getTotalExpenseDateRange(TestCaseData.DataTestCase1.ACCOUNT_ID, DateUtils.yearRange(2020)).log())
+        StepVerifier.create(this.expenseService.getTotalExpenseDateRange(TestCaseData.DataTestCase2.ACCOUNT_ID, DateUtils.yearRange(2020)).log())
                 .expectSubscription()
-                .expectNext(424.0)
+                .expectNext(28700.0)
                 .verifyComplete();
     }
 
@@ -68,10 +63,10 @@ class ExpenseServiceTest {
         StepVerifier.create(this.expenseService.getExpenseAvgGroupByCategory(TestCaseData.DataTestCase2.ACCOUNT_ID, 2020).log())
                 .expectSubscription()
                 .assertNext((result) -> {
-                    assertEquals(818.18, result.get(TestCaseData.LOAN_CATEGORY) );
-                    assertEquals(818.18, result.get(TestCaseData.BILL_CATEGORY) );
-                    assertEquals(754.55, result.get(TestCaseData.FARM_CATEGORY) );
-                    assertEquals(218.18, result.get(TestCaseData.FOOD_CATEGORY) );
+                    assertEquals(750.0, result.get(TestCaseData.LOAN_CATEGORY) );
+                    assertEquals(750.0, result.get(TestCaseData.BILL_CATEGORY) );
+                    assertEquals(691.67, result.get(TestCaseData.FARM_CATEGORY) );
+                    assertEquals(200.0, result.get(TestCaseData.FOOD_CATEGORY) );
                 })
                 .verifyComplete();
     }

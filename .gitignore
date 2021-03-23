@@ -80,3 +80,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
+/account-mi-server/out/**
+/account-mi-api/out/**

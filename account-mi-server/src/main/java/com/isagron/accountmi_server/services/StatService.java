@@ -110,7 +110,7 @@ public class StatService {
         DateRange currentMonthDateRange = DateUtils.getMonthDateRange(month, year);
 
         DateRange prevMonthDateRange = DateUtils.getPrevMonthDateRange(month, year);
-        DateRange currentYearDateRange = DateUtils.getCurrentYearDateRange();
+        DateRange currentYearDateRange = DateUtils.yearRange(year);
 
         Mono<Double> totalExpensesForCurrentMonth = expenseService.getTotalExpenseDateRange(accountId, currentMonthDateRange)
                 .switchIfEmpty(Mono.just(0.0));

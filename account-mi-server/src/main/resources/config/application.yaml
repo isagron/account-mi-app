@@ -2,8 +2,6 @@ spring:
   data:
     mongodb:
       database: account-mi
-      host: "${db.host}"
-      port: "${db.port}"
       uri: "mongodb://${db.host}:${db.port}/${spring.data.mongodb.database}"
 
 security:

@@ -53,20 +53,11 @@ class StatServiceTest {
 
     private List<Expense> expenses;
 
-    @BeforeEach
-    public void setup() throws ParseException {
-        this.expenses = TestCaseData.DataTestCase1.expenseDataTestCase1();
-
-        this.expenseRepository.deleteAll()
-                .thenMany(Flux.fromIterable(expenses))
-                .flatMap(expense -> expenseRepository.save(expense))
-                .doOnNext(expense -> System.out.println("Inserted expense is: " + expense))
-                .blockLast();
-    }
 
 
     @Test
-    public void getAccountBalanceForMonth(){
+    public void getAccountBalanceForMonth() throws ParseException {
+        DataLoader.loadData(this.expenseRepository, TestCaseData.DataTestCase1.expenseDataTestCase1());
 
         StepVerifier.create(this.statService.getAccountBalanceForMonth(TestCaseData.DataTestCase1.ACCOUNT_ID, 5, 2020).log())
                 .expectSubscription()
@@ -82,13 +73,11 @@ class StatServiceTest {
     public void getGoalStatusTest() throws ParseException {
         DataLoader.loadData(this.accountRepository, TestCaseData.DataTestCase2.accountData());
         DataLoader.loadData(this.expenseRepository, TestCaseData.DataTestCase2.expenseData());
-        this.statService.getGoalStatus(TestCaseData.DataTestCase2.ACCOUNT_ID, 0, 2020).log()
-                .subscribe();
         Map<String, Double> avgByCategoryResult = Map.of(
-                FARM_CATEGORY, 754.55,
-                LOAN_CATEGORY, 818.18,
-                BILL_CATEGORY, 818.18,
-                FOOD_CATEGORY, 218.18
+                FARM_CATEGORY, 691.67,
+                LOAN_CATEGORY, 750.0,
+                BILL_CATEGORY, 750.0,
+                FOOD_CATEGORY, 200.0
         );
         StepVerifier.create(this.statService.getGoalStatus(TestCaseData.DataTestCase2.ACCOUNT_ID, 0, 2020).log())
                 .expectSubscription()

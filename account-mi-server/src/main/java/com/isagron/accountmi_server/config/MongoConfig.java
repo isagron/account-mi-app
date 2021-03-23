@@ -22,9 +22,12 @@ public class MongoConfig {
     @Value("${spring.data.mongodb.database}")
     private String database;
 
-    public @Bean
-    MongoClient reactiveMongoClient() {
-        return MongoClients.create(mongoUrl);
+    public @Bean MongoClient reactiveMongoClient() {
+        if (mongoUrl!=null) {
+            return MongoClients.create(mongoUrl);
+        } else {
+            return MongoClients.create();
+        }
     }
 
     public @Bean ReactiveMongoTemplate reactiveMongoTemplate() {
