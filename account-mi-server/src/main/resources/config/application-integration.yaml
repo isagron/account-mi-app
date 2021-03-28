@@ -6,7 +6,11 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+web-filters:
+  inject-user-id: true
+
 security:
+  enable: true
   firebase-props:
     enable: true
     api-key: "${firebase-api-key}"

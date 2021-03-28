@@ -21,13 +21,15 @@ import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 
-@Component
 @Slf4j
-@Profile("!dev")
 public class UserIdInjectWebFilter implements WebFilter {
 
     @Autowired
     SecurityProperties restSecProps;
+
+    public UserIdInjectWebFilter(SecurityProperties restSecProps){
+        this.restSecProps = restSecProps;
+    }
 
     protected boolean shouldFilter(String path) {
         return restSecProps.getAllowedPublicApis()

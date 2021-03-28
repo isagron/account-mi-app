@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://account-mi-server:8081',
-  rootApi: '/v1',
+  rootApi: '/api/v1',
   enable_security: false,
 };
 

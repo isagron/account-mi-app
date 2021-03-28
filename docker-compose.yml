@@ -3,14 +3,21 @@ services:
   mongo-server:
     image: mongo
     restart: always
+    container_name: mongo
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=isagron
-      - MONGO_INITDB_ROOT_PASSWORD=isagron
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=sisma
+      - DB_USER=isagron
+      - DB_PASSWORD=isagron
+      - DB_NAME=account-mi
+    volumes:
+      - ./mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
     ports:
       - 27018:27017
   account-mi-server:
     build:
       context: "./account-mi-server"
+    container_name: server
     environment:
       - spring.profiles.active=unsecure
       - db.host=mongo-server
@@ -22,6 +29,8 @@ services:
   account-mi-frontend:
     build:
       context: "./account-mi-frontend"
+    container_name: client
+    restart: always
     ports:
       - 4201:80
 

@@ -11,7 +11,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
-@Profile("dev")
+@Profile({"unsecure" ,"dev" })
 public class SwaggerConfig implements WebFluxConfigurer {
 
     @Override
@@ -24,14 +24,5 @@ public class SwaggerConfig implements WebFluxConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-    @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        return http
-                .authorizeExchange()
-                .anyExchange()
-                .permitAll()
-                .and()
-                .csrf().disable()
-                .build();
-    }
+
 }

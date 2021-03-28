@@ -4,9 +4,6 @@ db:
   user: "${db.user}"
   password: "${db.password}"
 
-
-
-
 springdoc:
   swagger-ui:
     path: '/swagger-ui.html'
@@ -20,7 +17,9 @@ spring:
       host: "${db.host}"
       port: "${db.port}"
       uri: "mongodb://${db.user}:${db.password}@${db.host}:${db.port}/${spring.data.mongodb.database}"
+      #uri: "mongodb://${db.host}:${db.port}/${spring.data.mongodb.database}"
 
 security:
   firebase-props:
     enable: false
+  enable: false

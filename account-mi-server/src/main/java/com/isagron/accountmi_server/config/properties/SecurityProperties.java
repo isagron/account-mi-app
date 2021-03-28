@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class SecurityProperties {
 
+    boolean enable;
     FirebaseProperties firebaseProps;
     boolean allowCredentials;
     List<String> allowedOrigins;

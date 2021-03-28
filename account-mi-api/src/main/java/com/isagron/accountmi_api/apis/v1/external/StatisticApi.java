@@ -1,5 +1,7 @@
 package com.isagron.accountmi_api.apis.v1.external;
 
+import static com.isagron.accountmi_api.apis.v1.RootApiPath.ROOT_PATH;
+
 public interface StatisticApi {
 
     class PathVar {
@@ -10,7 +12,7 @@ public interface StatisticApi {
     }
 
     class Path {
-        public static final String STATISTICS_PATH = "/v1/statistics";
+        public static final String STATISTICS_PATH = ROOT_PATH + "/statistics";
         public static final String STATISTICS_ACCOUNT_BALANCE_PATH = "/account-balance";
         public static final String GOAL_STATUS_PATH = "/goal-status";
         public static final String CATEGORY_DIVISION_FOR_MONTH_PATH = "/category-division-per-month";
