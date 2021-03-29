@@ -13,6 +13,6 @@ before_install:
 after_success:
   - docker build -t isagron/account-mi-server ./account-mi-server
   - docker build -t isagron/account-mi-client ./account-mi-frontend
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push isagron/account-mi-server
   - docker push isagron/account-mi-client
