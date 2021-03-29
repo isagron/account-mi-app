@@ -1,7 +1,18 @@
+sudo: required
 language: java
 
 jdk:
   - oraclejdk15
 
+services:
+  - docker
+
 before_install:
   - chmod +x gradlew
+
+after_success:
+  - docker build -t isagron/account-mi-server ./account-mi-server
+  - docker build -t isagron/account-mi-client ./account-mi-frontend
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push isagron/account-mi-server
+  - docker push isagron/account-mi-client
