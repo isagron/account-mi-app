@@ -8,6 +8,6 @@ RUN npm run build --prod
 
 
 FROM nginx:alpine
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/with-routing.conf /etc/nginx/conf.d/default.conf
 COPY --from=0 /app/dist/accout-mi /usr/share/nginx/html
-EXPOSE 3000
+EXPOSE 80

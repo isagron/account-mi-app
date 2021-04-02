@@ -28,6 +28,7 @@ services:
       - 8081:8080
   account-mi-frontend:
     build:
+      dockerfile: Dockerfile.routing
       context: "./account-mi-frontend"
     container_name: client
     restart: always
