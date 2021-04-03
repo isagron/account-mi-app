@@ -12,6 +12,7 @@ services:
       - DB_NAME=account-mi
     volumes:
       - ./mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ./mongo/data:/data/db
     ports:
       - 27018:27017
   account-mi-server:

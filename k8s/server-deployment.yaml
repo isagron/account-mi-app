@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-mi-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: account-mi-server
+          image: "innon/account-mi-server"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.profiles.active
+              value: unsecure
+            - name: db.host
+              value: account-mi-db-cluster-ip-service
+            - name: db.port
+              value: '27017'
+            - name: db.user
+              value: isagron
+            - name: db.password
+              valueFrom:
+                secretKeyRef:
+                  name: dbpassword
+                  key: dbpassword
