@@ -1,0 +1,19 @@
+# need to change the name of the file to .travis.yml
+sudo: required
+language: java
+
+jdk:
+  - oraclejdk15
+
+services:
+  - docker
+
+before_install:
+  - chmod +x gradlew
+
+after_success:
+  - docker build -t innon/account-mi-server ./account-mi-server
+  - docker build -t innon/account-mi-client ./account-mi-frontend
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push innon/account-mi-server
+  - docker push innon/account-mi-client

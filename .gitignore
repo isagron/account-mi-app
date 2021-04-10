@@ -82,3 +82,4 @@ Thumbs.db
 
 /account-mi-server/out/**
 /account-mi-api/out/**
+/service-account.json
