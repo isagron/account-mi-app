@@ -15,7 +15,6 @@ before_install:
   - gcloud config set compute/zone europe-central2-a
   - gcloud container clusters get-credentials account-mi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
 deploy:
   provider: script
   script: bash ./deploy.sh
