@@ -1,6 +1,3 @@
-docker build -t innon/account-mi-server:latest -t innon/account-mi-server:$SHA ./account-mi-server
-docker build -t innon/account-mi-client:latest -t innon/account-mi-client:$SHA ./account-mi-frontend
-
 docker push innon/account-mi-server:latest
 docker push innon/account-mi-client:latest
 

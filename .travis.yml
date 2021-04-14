@@ -1,19 +1,28 @@
-# need to change the name of the file to travis-tmp.yml
 sudo: required
 language: java
-
 jdk:
   - oraclejdk15
-
 services:
   - docker
-
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
   - chmod +x gradlew
-
-after_success:
-  - docker build -t innon/account-mi-server ./account-mi-server
-  - docker build -t innon/account-mi-client ./account-mi-frontend
+  - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
+  - curl https://sdk.cloud.google.com | bash > /dev/null;
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud components update kubectl
+  - gcloud auth activate-service-account --key-file service-account.json
+  - gcloud config set project account-mi-app
+  - gcloud config set compute/zone europe-central2-a
+  - gcloud container clusters get-credentials account-mi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push innon/account-mi-server
-  - docker push innon/account-mi-client
+  - docker build -t innon/account-mi-server -t innon/account-mi-server:$SHA ./account-mi-server
+  - docker build -t innon/account-mi-client -t innon/account-mi-client:$SHA ./account-mi-frontend
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    branch: master
