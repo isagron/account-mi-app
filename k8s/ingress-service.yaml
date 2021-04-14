@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ingress-service
@@ -11,16 +11,28 @@ spec:
     - http:
         paths:
           - path: /?(.*)
-            pathType: Prefix
             backend:
-              service:
-                name: account-mi-client-cluster-ip-service
-                port:
-                  number: 3000
+              serviceName: account-mi-client-cluster-ip-service
+              servicePort: 3000
           - path: /api/?(.*)
-            pathType: Prefix
             backend:
-              service:
-                name: account-mi-server-cluster-ip-service
-                port:
-                  number: 8080
+              serviceName: account-mi-server-cluster-ip-service
+              servicePort: 8080
+#spec:
+#  rules:
+#    - http:
+#        paths:
+#          - path: /?(.*)
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: account-mi-client-cluster-ip-service
+#                port:
+#                  number: 3000
+#          - path: /api/?(.*)
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: account-mi-server-cluster-ip-service
+#                port:
+#                  number: 8080
