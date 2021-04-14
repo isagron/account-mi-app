@@ -8,12 +8,9 @@ env:
   global:
     - SHA=$(git rev-parse HEAD)
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-script:
-  - chmod +x gradlew
 
-after_success:
-  - docker build -t innon/account-mi-server -t innon/account-mi-server:$SHA ./account-mi-server
-  - docker build -t innon/account-mi-client -t innon/account-mi-client:$SHA ./account-mi-frontend
+before_install:
+  - chmod +x gradlew
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
@@ -22,8 +19,11 @@ after_success:
   - gcloud config set project account-mi-app
   - gcloud config set compute/zone europe-central2-a
   - gcloud container clusters get-credentials account-mi-cluster
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t innon/account-mi-server -t innon/account-mi-server:$SHA ./account-mi-server
+  - docker build -t innon/account-mi-client -t innon/account-mi-client:$SHA ./account-mi-frontend
 deploy:
   provider: script
   script: bash ./deploy.sh
