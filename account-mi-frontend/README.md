@@ -1,4 +1,4 @@
-# AccoutMi
+# AccountMi
 
 ## Development server
 
