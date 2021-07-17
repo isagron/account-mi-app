@@ -29,7 +29,7 @@ public class IncomeService {
         return this.incomeRepository.find(accountId, type, month, year, pageable)
                 .map(page -> new PageSupport<>(
                         page.getContent().stream().map(this::convertToDto).collect(Collectors.toList()),
-                        page.getPageNumber(), page.getPageSize(), page.getTotalElements()
+                        page.getPageNumber(), page.getPageSize(), page.getTotalElements(), page.getTotalAmount()
                 ));
     }
 

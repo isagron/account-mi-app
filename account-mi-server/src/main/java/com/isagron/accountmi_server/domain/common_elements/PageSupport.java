@@ -19,6 +19,7 @@ public class PageSupport<T> {
     int pageNumber;
     int pageSize;
     long totalElements;
+    double totalAmount;
 
     @JsonProperty
     public long totalPages() {

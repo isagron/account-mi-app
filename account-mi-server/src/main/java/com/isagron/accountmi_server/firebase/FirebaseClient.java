@@ -13,6 +13,7 @@ import com.isagron.accountmi_server.exceptions.FirebaseException;
 import com.isagron.accountmi_server.firebase.dtos.FbRefreshTokenRequest;
 import com.isagron.accountmi_server.firebase.dtos.FbRefreshTokenResponse;
 import com.isagron.accountmi_server.firebase.dtos.FbUserAuthenticationWithPassword;
+import com.isagron.accountmi_server.firebase.dtos.FirebaseError;
 import com.isagron.accountmi_server.firebase.dtos.FirebaseErrorResponse;
 import com.isagron.accountmi_server.firebase.dtos.FirebaseUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,11 +88,9 @@ public class FirebaseClient {
                 .uri(uri)
                 .body(BodyInserters.fromValue(data))
                 .retrieve()
-                .onStatus(HttpStatus::isError, response -> {
-                    return response.bodyToMono(FirebaseErrorResponse.class).flatMap(error -> {
-                        return Mono.error(exceptionConverter.convert(error));
-                    });
-                })
+                .onStatus(HttpStatus::isError,
+                        response -> response.bodyToMono(FirebaseErrorResponse.class)
+                                .flatMap(error -> Mono.error(exceptionConverter.convert(error))))
                 .bodyToMono(FirebaseUser.class);
     }
 
@@ -113,10 +112,11 @@ public class FirebaseClient {
         return webClient.post()
                 .uri(uri)
                 .body(BodyInserters.fromValue(data))
-                .exchange()
-                .flatMap(clientResponse -> {
-                    return clientResponse.bodyToMono(FirebaseUser.class);
-                });
+                .retrieve()
+                .onStatus(HttpStatus::isError,
+                        response -> response.bodyToMono(FirebaseErrorResponse.class)
+                                .flatMap(error -> Mono.error(exceptionConverter.convert(error))))
+                .bodyToMono(FirebaseUser.class);
     }
 
     public Mono<FbRefreshTokenResponse> refreshToken(String refreshToken){

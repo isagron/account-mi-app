@@ -6,6 +6,9 @@ spring:
 
 security:
   enable: false
+  allowed-public-apis:
+    - /v1/auth/signin
+    - /v1/auth/signup
 
 web-filters:
   inject-user-id: false

@@ -60,13 +60,17 @@ public class ExtendIncomeRepositoryImpl implements ExtendIncomeRepository {
     public Mono<PageSupport<Income>> find(String accountId, String category, Integer month, Integer year, Pageable pageable) {
         return find(accountId, category, month, year)
                 .collectList()
-                .map(list -> new PageSupport<>(
-                        list
-                                .stream()
-                                .skip(pageable.getPageNumber() * pageable.getPageSize())
-                                .limit(pageable.getPageSize())
-                                .collect(Collectors.toList()),
-                        pageable.getPageNumber(), pageable.getPageSize(), list.size()));
+                .map(list -> {
+                    double totalAmount = list.stream().mapToDouble(Income::getAmount).sum();
+
+                    return new PageSupport<>(
+                            list
+                                    .stream()
+                                    .skip(pageable.getPageNumber() * pageable.getPageSize())
+                                    .limit(pageable.getPageSize())
+                                    .collect(Collectors.toList()),
+                            pageable.getPageNumber(), pageable.getPageSize(), list.size(), totalAmount);
+                });
 
 
     }

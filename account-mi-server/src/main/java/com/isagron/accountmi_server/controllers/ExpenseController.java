@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import static com.isagron.accountmi_api.apis.v1.external.ExpenseApi.Path.*;
 import static com.isagron.accountmi_api.apis.v1.external.ExpenseApi.PathVar.EXPENSE_ID;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(ExpenseApi.Path.EXPENSE_PATH)
 public class ExpenseController {
@@ -51,7 +53,7 @@ public class ExpenseController {
     }
 
     @GetMapping(EXPENSE_STORE_PATH)
-    public Flux<String> getAllStores(@RequestParam String accountId){
+    public List<String> getAllStores(@RequestParam String accountId){
         return expenseService.getAllStores(accountId);
     }
 

@@ -17,6 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -62,7 +63,7 @@ public class ExpenseService {
         return this.expenseRepository.find(accountId, category, month, year, pageable)
                 .map(page -> new PageSupport<>(
                         page.getContent().stream().map(this::convertToDto).collect(Collectors.toList()),
-                        page.getPageNumber(), page.getPageSize(), page.getTotalElements()
+                        page.getPageNumber(), page.getPageSize(), page.getTotalElements(), page.getTotalAmount()
                 ));
     }
 
@@ -73,7 +74,7 @@ public class ExpenseService {
                 .map(this::convertToDto);
     }
 
-    public Flux<String> getAllStores(String accountId) {
+    public List<String> getAllStores(String accountId) {
         return this.expenseRepository.findAllStores(accountId);
     }
 

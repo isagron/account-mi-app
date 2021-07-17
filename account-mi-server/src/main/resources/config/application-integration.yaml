@@ -11,6 +11,42 @@ web-filters:
 
 security:
   enable: true
+  allowed-origins:
+    - ${frontend.dev.server}
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - Authorization
+    - Origin
+    - Content-Type
+    - Accept
+    - Accept-Encoding
+    - Accept-Language
+    - Access-Control-Allow-Origin
+    - Access-Control-Allow-Headers
+    - Access-Control-Request-Method
+    - X-Requested-With
+    - X-Auth-Token
+    - X-Xsrf-Token
+    - Cache-Control
+    - Id-Token
+  allowed-public-apis:
+    - /favicon.ico
+    - /v1/auth/signin
+    - /v1/auth/signup
+    - /v3/api-docs/**
+    - /configuration/**
+    - /swagger*/**
+    - /webjars/**
+    - /swagger-resources/**
+    - /sw.js
+  exposed-headers:
+    - X-Xsrf-Token
   firebase-props:
     enable: true
     api-key: "${firebase-api-key}"

@@ -1,6 +1,7 @@
 package com.isagron.accountmi_server.controllers.handlers;
 
 import com.isagron.accountmi_api.dtos.errors.ErrorDto;
+import com.isagron.accountmi_server.exceptions.FirebaseException;
 import com.isagron.accountmi_server.exceptions.UserAlreadyExistException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -20,6 +21,15 @@ public class ValidationExceptionHandler {
     public ErrorDto handleUserAlreadyExistException(UserAlreadyExistException e){
         return ErrorDto.builder()
                 .message(e.getMessage())
+                .errorCode(HttpStatus.BAD_REQUEST)
+                .build();
+    }
+
+    @ExceptionHandler(FirebaseException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public ErrorDto handleUserAlreadyExistException(FirebaseException e){
+        return ErrorDto.builder()
+                .message(e.getError().getMessage())
                 .errorCode(HttpStatus.BAD_REQUEST)
                 .build();
     }

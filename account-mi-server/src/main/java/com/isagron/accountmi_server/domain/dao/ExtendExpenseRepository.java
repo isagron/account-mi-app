@@ -21,7 +21,7 @@ public interface ExtendExpenseRepository {
     Mono<PageSupport<Expense>> find(String accountId, String category, Integer month, Integer year, Pageable pageable);
     Flux<Expense> findByMonth(int month, List<Criteria> criterion);
 
-    Flux<String> findAllStores(String accountId);
+    List<String> findAllStores(String accountId);
 
     Flux<Integer> getExpensesYears(String accountId);
     Mono<Double> getTotalExpenseDateRange(String accountId, DateRange dateRange);

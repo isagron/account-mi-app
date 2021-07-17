@@ -71,13 +71,17 @@ public class ExtendExpenseRepositoryImpl implements ExtendExpenseRepository {
     public Mono<PageSupport<Expense>> find(String accountId, String category, Integer month, Integer year, Pageable pageable) {
         return find(accountId, category, month, year)
                 .collectList()
-                .map(list -> new PageSupport<>(
-                        list
-                                .stream()
-                                .skip(pageable.getPageNumber() * pageable.getPageSize())
-                                .limit(pageable.getPageSize())
-                                .collect(Collectors.toList()),
-                        pageable.getPageNumber(), pageable.getPageSize(), list.size()));
+                .map(list -> {
+                    double totalAmount = list.stream().mapToDouble(Expense::getAmount).sum();
+                            return new PageSupport<>(
+                                    list
+                                            .stream()
+                                            .skip(pageable.getPageNumber() * pageable.getPageSize())
+                                            .limit(pageable.getPageSize())
+                                            .collect(Collectors.toList()),
+                                    pageable.getPageNumber(), pageable.getPageSize(), list.size(), totalAmount);
+                }
+                        );
 
 
     }
@@ -96,9 +100,10 @@ public class ExtendExpenseRepositoryImpl implements ExtendExpenseRepository {
     }
 
     @Override
-    public Flux<String> findAllStores(String accountId) {
+    public List<String> findAllStores(String accountId) {
         Query query = new Query(Criteria.where(Expense.Fields.accountId).is(accountId));
-        return mongoTemplate.findDistinct(query, Expense.Fields.store, Expense.class, String.class);
+        return mongoTemplate.findDistinct(query, Expense.Fields.store, Expense.class, String.class)
+                .collectList().block();
     }
 
     @Override

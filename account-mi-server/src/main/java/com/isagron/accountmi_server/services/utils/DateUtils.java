@@ -13,6 +13,10 @@ public class DateUtils {
         instance.set(Calendar.YEAR, year);
         instance.set(Calendar.MONTH, month);
         instance.set(Calendar.DAY_OF_MONTH, 1);
+        instance.set(Calendar.HOUR_OF_DAY, 0);
+        instance.set(Calendar.MINUTE, 0);
+        instance.set(Calendar.SECOND, 0);
+        instance.set(Calendar.MILLISECOND, 0);
         return instance.getTime();
     }
 
