@@ -15,6 +15,7 @@ import {catchError} from 'rxjs/operators';
 export class SingupComponent implements OnInit {
 
   isLoading = true;
+  passwordsNotMatchError = null;
 
   signupForm: FormGroup;
   expenseCategories: string[] = [];
@@ -25,33 +26,25 @@ export class SingupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       passwords: new FormGroup({
         password: new FormControl(null, [Validators.required]),
         confirmPassword: new FormControl(null, [Validators.required]),
-      }, [this.validateConfirmPassword.bind(this)]),
-
-      currentBalance: new FormControl(0, [Validators.required]),
+      }),
     });
   }
 
 
-  validateConfirmPassword(control: FormControl): { [key: string]: boolean } {
-    console.log(this.signupForm);
-    console.log(control.get('password').value);
-    console.log(control.get('confirmPassword').value);
-    if (control.get('password').value !== control.get('confirmPassword').value) {
-      console.log('valid');
-      return {'passwordMustBeMatch': true};
-    }
-    return null;
-  }
 
 
   onSubmit() {
+    this.passwordsNotMatchError = null;
     const email = this.signupForm.value.email;
     const passwords = this.signupForm.value.passwords;
+
+    if (passwords.password !== passwords.confirmPassword) {
+      this.passwordsNotMatchError = 'Password must be the same';
+    }
 
     this.isLoading = true;
 

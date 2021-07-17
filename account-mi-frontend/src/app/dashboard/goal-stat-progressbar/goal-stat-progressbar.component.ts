@@ -26,8 +26,7 @@ export class GoalStatProgressbarComponent implements OnInit {
 
   getActualNormalizeProgress() {
     if (this.isAboveExpected()) {
-      const value = this.actual - this.goal;
-      return (value / this.actual) * 100;
+      return 100 - ((this.goal / this.actual) * 100);
     } else {
       return (this.actual / this.goal) * 100;
     }
@@ -37,7 +36,7 @@ export class GoalStatProgressbarComponent implements OnInit {
     if (this.isAboveExpected()) {
       return (this.goal / this.actual) * 100;
     } else {
-      return this.goal;
+      return 100;
     }
   }
 }

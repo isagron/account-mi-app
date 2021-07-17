@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ChartOptions} from "chart.js";
 
 @Component({
   selector: 'app-pie-chart-component',
@@ -7,12 +8,18 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PieChartComponentComponent implements OnInit {
   @Input()
-  public pieChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
+  public pieChartLabels = [];
   @Input()
-  public pieChartData = [120, 150, 180, 90];
+  public pieChartData = [];
   @Input()
   public pieChartType = 'pie';
-  constructor() { }
+
+
+  options: ChartOptions = {};
+
+  constructor() {
+  }
+
   ngOnInit() {
   }
 

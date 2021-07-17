@@ -12,15 +12,21 @@ export class SettingGoalsComponent implements OnInit, OnDestroy {
   goalSettings: GoalSetting[] = [];
   private goalSubscription: Subscription;
   public disabled = false;
+  totalGoalValue = 0;
 
   intervalOptions: string[] = [GoalInterval.MONTH, GoalInterval.YEAR];
-  constructor(private accountService: AccountService) { }
+
+  constructor(private accountService: AccountService) {
+  }
 
   ngOnInit(): void {
     this.goalSubscription = this.accountService.goalSubject.subscribe(goals => {
+      this.totalGoalValue = 0;
       this.goalSettings = goals.map(goal => {
+        this.totalGoalValue = this.totalGoalValue + goal.amount;
         return new GoalSetting(goal.goalId, goal.category, goal.amount, goal.interval, GoalSettingMode.SAVE);
       });
+
     });
 
   }
@@ -30,8 +36,8 @@ export class SettingGoalsComponent implements OnInit, OnDestroy {
   }
 
   switchToEditMode(gs: GoalSetting) {
-      gs.mode = GoalSettingMode.EDIT;
-      this.disabled = true;
+    gs.mode = GoalSettingMode.EDIT;
+    this.disabled = true;
   }
 
   saveGoal(trGoalItem: HTMLTableRowElement, gs: GoalSetting, goalIndex: number) {

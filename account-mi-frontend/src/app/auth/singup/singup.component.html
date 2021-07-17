@@ -28,6 +28,8 @@
             name="confirmPassword"
             id="confirm-password"
             formControlName="confirmPassword">
+          <p *ngIf="passwordsNotMatchError" class="text-danger">{{passwordsNotMatchError}}</p>
+
         </div>
       </div>
 
@@ -39,7 +41,7 @@
       class="btn btn-primary"
       type="submit"
       >
-      'Sign Up'
+      Sign Up
     </button>
   </div>
 </form>

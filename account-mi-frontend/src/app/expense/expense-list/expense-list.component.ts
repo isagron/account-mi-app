@@ -24,6 +24,8 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
   expenses: Expense[];
   categories: string[];
   shops: Array<string>;
+  totalAmountForPage = 0;
+  totalAmountForFilter = 0;
 
   private selectedYear: number;
   private selectedMonth: number;
@@ -56,6 +58,8 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
       if (expensePage != null) {
         if (expensePage.content != null) {
           this.expenses = expensePage.content;
+          this.totalAmountForFilter = expensePage.totalAmount;
+          this.totalAmountForPage = this.getTotalAmountForPage();
         }
         this.paginationService.setPageInformation(expensePage.pageNumber, expensePage.pageSize, expensePage.totalElements);
       }
@@ -71,7 +75,11 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     });
 
     this.expenseService.storesSubject.subscribe(stores => {
-      this.shops = stores.slice();
+      if (stores !== null) {
+        this.shops = stores.slice();
+      } else {
+        this.shops = [];
+      }
     });
 
     this.addNewExpenseSubscription = this.expenseService.addNewExpenseSubject
@@ -139,5 +147,13 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
   deleteExpense(expense: Expense) {
     this.expenseService.deleteExpense(expense)
       .subscribe(() => this.filterExpenses());
+  }
+
+  private getTotalAmountForPage() {
+    let total = 0;
+    this.expenses.forEach(expense => {
+      total = total + expense.amount;
+    });
+    return total;
   }
 }

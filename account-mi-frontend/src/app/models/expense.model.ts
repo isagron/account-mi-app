@@ -26,6 +26,10 @@ export class Expense {
 
 export class ExpensePage {
 
-  constructor(public content: Expense[], public pageNumber: number, public pageSize: number, public totalElements: number) {
+  constructor(public content: Expense[],
+              public pageNumber: number,
+              public pageSize: number,
+              public totalElements: number,
+              public totalAmount: number) {
   }
 }

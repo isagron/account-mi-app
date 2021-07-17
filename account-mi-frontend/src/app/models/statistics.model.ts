@@ -1,4 +1,3 @@
-
 export class GoalStatus {
 
   constructor(public goalId: string,
@@ -17,5 +16,10 @@ export class CategoryPerMonthData {
 
 export class CategoryExpenseForMonth {
   constructor(public category: string, public month: number, public year: number, public amount: number, public goal: number) {
+  }
+}
+
+export class ExpenseTableSummary {
+  constructor(public category: string, public amount: number) {
   }
 }

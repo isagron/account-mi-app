@@ -31,7 +31,7 @@ export class NewIncomeComponent implements OnInit {
       type: new FormControl(null, Validators.required),
       amount: new FormControl(null, [Validators.required, Validators.min(0)]),
       date: new FormControl(null, Validators.required),
-      consistent: new FormControl({value: false, disabled: false}, Validators.required)
+      consistent: new FormControl({value: false, disabled: false})
     });
 
     this.filteredOptions = this.addNewIncomeForm.get('type').valueChanges.pipe(

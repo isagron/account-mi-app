@@ -4,6 +4,7 @@ import {CommonValues} from '../../../models/utils.model';
 import {Subscription} from 'rxjs';
 import {Color} from 'ng2-charts';
 import {AccountService} from '../../../services/account.service';
+import {ExpenseTableSummary} from "../../../models/statistics.model";
 
 @Component({
   selector: 'app-expense-category-month',
@@ -17,6 +18,7 @@ export class ExpenseCategoryMonthComponent implements OnInit, OnDestroy  {
   public pieChartLabels = [];
   public pieChartData = [];
   colors: Color[] = [];
+  tableData: ExpenseTableSummary[] = [];
 
   dataSubscription: Subscription;
 
@@ -43,6 +45,7 @@ export class ExpenseCategoryMonthComponent implements OnInit, OnDestroy  {
         });
         this.colors = [{backgroundColor: backgroundColors}];
         this.pieChartData = response.map(item => item.amount);
+        this.tableData = response.map(item => new ExpenseTableSummary(item.category, item.amount));
       }
     });
 

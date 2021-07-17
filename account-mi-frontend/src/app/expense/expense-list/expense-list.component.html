@@ -68,6 +68,8 @@
             </tr>
             </tbody>
           </table>
+          <p>Total amount spent for this page: {{totalAmountForPage}}</p>
+          <p>Total amount spent for current filter: {{totalAmountForFilter}}</p>
           <app-pageination
             (goToPageEvent)="goToPage($event)">
           </app-pageination>

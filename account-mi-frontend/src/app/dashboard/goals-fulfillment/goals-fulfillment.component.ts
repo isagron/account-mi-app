@@ -19,7 +19,11 @@ export class GoalsFulfillmentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.statService.goalStatusSubject.subscribe(goalsStatus => {
-      this.goalStats = goalsStatus;
+      if (goalsStatus === null) {
+        this.goalStats = [];
+      } else {
+        this.goalStats = goalsStatus;
+      }
     });
     this.accountService.accountSubject.subscribe(account => {
       if (account) {

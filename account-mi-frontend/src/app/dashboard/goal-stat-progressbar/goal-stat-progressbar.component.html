@@ -5,22 +5,23 @@
   </div>
   <div class="col-10 bottom">
     <div *ngIf="!isAboveExpected()" class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="goalStat.actualGoalAmount"
+      <div class="progress-bar bg-success" role="progressbar" aria-valuenow="goalStat.getActualNormalizeProgress()"
            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: getActualNormalizeProgress() + '%'}">
         {{ actual }}
       </div>
     </div>
     <div *ngIf="isAboveExpected()" class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="goalStat.actualGoalAmount"
+      <div class="progress-bar bg-success" role="progressbar" aria-valuenow="getGoalNormalizeProgress()"
            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: getGoalNormalizeProgress() + '%'}">
+        {{actual - goal}}
       </div>
-      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="goalStat.actualGoalAmount"
+      <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="goalStat.getActualNormalizeProgress()"
            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: getActualNormalizeProgress() + '%'}">
-        {{ actual }}
+        {{ goal }}
       </div>
     </div>
   </div>
   <div class="col-1">
-    {{  goal }}
+    {{  isAboveExpected() ? actual : goal }}
   </div>
 </div>

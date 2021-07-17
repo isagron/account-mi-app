@@ -1,45 +1,66 @@
-
 <h3 class="text-primary text border-bottom">Expenses partition by Category</h3>
 <div class="row">
-  <div class="col-12">
-    <label class="font-weight-bold" for="dropdownMonth">Month</label>
-    <div ngbDropdown class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMonth"
-        ngbDropdownToggle>
-        {{selectedMonth}}
-        <span class="caret"></span>
-      </button>
-      <ul ngbDropdownMenu aria-labelledby="dropdownCategory">
-        <li *ngFor="let month of getMonths()"><a ngbDropdownItem (click)="selectMonth(month)">{{month}}</a>
-        </li>
-      </ul>
+  <div class="col-8">
+    <div class="row">
+      <div class="col d-flex flex-row bd-highlight mb-3">
+        <label class="font-weight-bold" for="dropdownMonth">Month</label>
+        <div ngbDropdown class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMonth"
+            ngbDropdownToggle>
+            {{selectedMonth}}
+            <span class="caret"></span>
+          </button>
+          <ul ngbDropdownMenu aria-labelledby="dropdownCategory">
+            <li *ngFor="let month of getMonths()"><a ngbDropdownItem (click)="selectMonth(month)">{{month}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<hr>
-<div class="row align-items-center">
-  <div *ngIf="isLoading" style="text-align: center;">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-  <div *ngIf="!error" class="col-10">
-    <div style="display: block">
-      <canvas baseChart
-              [data]="pieChartData"
-              [labels]="pieChartLabels"
-              [colors]="colors"
-
-              chartType="pie"></canvas>
-    </div>
-  </div>
-  <div *ngIf="error" class="col-xs-12">
-    <div class="panel panel-danger">
-      <div class="panel-body">
-        No data available
+    <hr>
+    <div class="row align-items-center">
+      <div class="col" *ngIf="isLoading" style="text-align: center;">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <div *ngIf="!error" class="col">
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [colors]="colors"
+                  chartType="pie"></canvas>
+        </div>
+      </div>
+      <div *ngIf="error" class="col">
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            No data available
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div *ngIf="!error" class="col-4">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Amount</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let summary of tableData; index as i">
+      <tr>
+        <td>{{summary.category}}</td>
+        <td>{{summary.amount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
+
 
