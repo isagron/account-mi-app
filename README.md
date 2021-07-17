@@ -2,6 +2,7 @@
 Simple application for managing private bank account. Help to monitor incomes/outcomes and receive statistics.
 
 ##General
+
 ###Modules
 This project include three modules
 1. account-mi-frontend - user interface base on Angular 9
