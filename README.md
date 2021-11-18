@@ -1,27 +1,27 @@
 # Account-mi
 Simple application for managing private bank account. Help to monitor incomes/outcomes and receive statistics.
 
-##General
+## General
 
-###Modules
+### Modules
 This project include three modules
 1. account-mi-frontend - user interface base on Angular 9
 2. account-mi-server - web service implement base on spring boot
 3. account-mi-client - java library including all DTOs and rest clients.
 
-###Technologies
+### Technologies
 1. Angular 9
 2. Spring boot 2.3.4.RELEASE
 3. MongoDB
 4. Firebase (Authentication server)
 
-###Requirements
+### Requirements
 1. MongoDB server
 2. Firebase account - only if you want to work in secure mode
 
-##Build/run & configuration
+## Build/run & configuration
 
-###Configuration
+### Configuration
 ```yaml
 # Enable/disable security using firebase
 security:
@@ -66,8 +66,8 @@ web-filters:
   inject-user-id: false
 ```
 
-###Build / Run
-####Intellij
+### Build / Run
+#### Intellij
 Set the following environment variables through from run configuration or add them to the properties files according to the chosen profile.
 All the variables related to firebase can be copy from your application firebase account
 ```
@@ -86,7 +86,7 @@ firebase-client-id=<client-id>;
 firebase-client-cert-url=<certificate-url>
 ```
 
-####Docker
+#### Docker
 Download the images from docker hub
 ```
 docker pull innon/account-mi-server
@@ -99,7 +99,7 @@ docker run innon/account-mi-server
 ```
 Note! you will need to set the environment variable has defined when running from IDE
 
-####Docker compose
+#### Docker compose
 From root directory run
 note! make sure to change the value of environment variables according to your setup
 ```
